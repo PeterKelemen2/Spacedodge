@@ -14,6 +14,7 @@ BG = pygame.transform.scale(pygame.image.load("bg.jpeg"), (WIDTH, HEIGHT))
 PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 40
 PLAYER_SCALE = 50
+SCALE = 1.6
 
 PLAYER_VEL = 5
 STAR_WIDTH = 10
@@ -51,8 +52,9 @@ def main():
     #                      PLAYER_WIDTH, PLAYER_HEIGHT)
     # player = pygame.transform.scale(player_image, (PLAYER_WIDTH, PLAYER_HEIGHT))
 
-    player_image = pygame.image.load("rocket.png").convert_alpha()
-    player_image = pygame.transform.scale(player_image, (PLAYER_SCALE, PLAYER_SCALE))
+    player_image = pygame.image.load("rocket_3.png").convert_alpha()
+    player_image = pygame.transform.scale(player_image,
+                                          (player_image.get_width() * SCALE, player_image.get_height() * SCALE))
 
     player = player_image.get_rect(center=(player_image.get_width() // 2, player_image.get_height() // 2))
 
