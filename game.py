@@ -31,7 +31,7 @@ def draw(player, elapsed_time, stars):
     # pygame.draw.rect(WIN, "orange", player)
     # player = pygame.image.load('racecar.png')
 
-    pygame.draw()
+    # pygame.draw()
 
     for star in stars:
         pygame.draw.rect(WIN, "white", star)
@@ -45,6 +45,7 @@ def main():
     # player = pygame.Rect(200, HEIGHT - PLAYER_HEIGHT,
     #                      PLAYER_WIDTH, PLAYER_HEIGHT)
     player = pygame.transform.scale(pygame.image.load("rocket.png"), (PLAYER_WIDTH, PLAYER_HEIGHT))
+    print("Player initialized -", player)
 
     clock = pygame.time.Clock()
     start_time = time.time()
@@ -56,6 +57,7 @@ def main():
     stars = []
     hit = False
 
+    print("Starting game...")
     while run:
         star_count += clock.tick(60)
         elapsed_time = time.time() - start_time
