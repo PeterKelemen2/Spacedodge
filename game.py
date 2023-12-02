@@ -13,6 +13,7 @@ BG = pygame.transform.scale(pygame.image.load("bg.jpeg"), (WIDTH, HEIGHT))
 
 PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 40
+PLAYER_SCALE = 50
 
 PLAYER_VEL = 5
 STAR_WIDTH = 10
@@ -22,13 +23,17 @@ STAR_VEL = 3
 FONT = pygame.font.SysFont("comicsans", 30)
 
 
-def draw(player, elapsed_time, stars):
+def draw(player_image, player, elapsed_time, stars):
     WIN.blit(BG, (0, 0))
 
     time_text = FONT.render(f"Idő: {round(elapsed_time)}mp", 1, "lime")
     WIN.blit(time_text, (10, 10))
 
     # pygame.draw.rect(WIN, "orange", player)
+    # pygame.draw.rect(WIN, "red", player)
+
+    player_image.set_colorkey((255, 0, 0))
+    WIN.blit(player_image, player)
     # player = pygame.image.load('racecar.png')
 
     # pygame.draw()
@@ -44,7 +49,16 @@ def main():
 
     # player = pygame.Rect(200, HEIGHT - PLAYER_HEIGHT,
     #                      PLAYER_WIDTH, PLAYER_HEIGHT)
-    player = pygame.transform.scale(pygame.image.load("rocket.png"), (PLAYER_WIDTH, PLAYER_HEIGHT))
+    # player = pygame.transform.scale(player_image, (PLAYER_WIDTH, PLAYER_HEIGHT))
+
+    player_image = pygame.image.load("rocket.png").convert_alpha()
+    player_image = pygame.transform.scale(player_image, (PLAYER_SCALE, PLAYER_SCALE))
+
+    player = player_image.get_rect(center=(player_image.get_width() // 2, player_image.get_height() // 2))
+
+    player.x = WIDTH // 2 - player_image.get_width() // 2
+    player.y = HEIGHT - player_image.get_height()
+
     print("Player initialized -", player)
 
     clock = pygame.time.Clock()
@@ -99,7 +113,7 @@ def main():
             pygame.time.delay(2000)
             break
 
-        draw(player, elapsed_time, stars)
+        draw(player_image, player, elapsed_time, stars)
 
     # pygame.quit()
     sys.exit(0)
